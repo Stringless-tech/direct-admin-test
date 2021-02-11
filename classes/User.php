@@ -42,7 +42,6 @@ class User
 			'password' => $password,
 			'email' => $email,
 			'domain' => $domain,
-			'package' => $package,
 		];
 		if($this->validator->validateData($data))
 			return $this->adminContext->createUser($username, $password, $email, $domain, $this->server_ip, $package);
