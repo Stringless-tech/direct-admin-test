@@ -33,8 +33,8 @@ class User
 	{
 		$package = [
 			'bandwidth' => 'unlimited',
-			'ftp' => '2',
-			'mysql' => '3',
+			'ftp' => 2,
+			'mysql' => 3,
 		];
 	
 		$data = [
