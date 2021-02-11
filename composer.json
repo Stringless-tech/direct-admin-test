@@ -1,0 +1,5 @@
+{
+    "require": {
+        "omines/directadmin": "^0.1.7"
+    }
+}
