@@ -14,7 +14,7 @@ class User
 	public function __construct($validator)
 	{
 		$this->validator = $validator;
-		$a = require '../.env';
+		$a = require '../config.php';
 		$this->server_ip = $a['server_ip'];
 		$this->server_login = $a['server_login'];
 		$this->server_pass = $a['server_pass'];

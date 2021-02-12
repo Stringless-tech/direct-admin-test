@@ -3,12 +3,10 @@
 class Validator
 {
 	private $errors = [];
-	
-	private $isValid = true;
-	
+		
 	public function isValid(): bool
 	{
-		return $this->isValid;
+		return empty($this->errors);
 	}
 	
 	public function getErrors(): array
@@ -16,11 +14,10 @@ class Validator
         		return $this->errors;
     	}
 	
-	public function validateRequired(array $rule,$string)
+	public function validateRequired(array $rule, string $string): bool
 	{
 		if($string == '' && $rule['required'] === true)
 		{
-			$this->isValid = false;
 			$this->errors[$rule['fieldName']] = 'To pole jest wymagane';
 			return false;
 		}
@@ -28,11 +25,10 @@ class Validator
 		return true;
 	}
 		
-	public function validatePassword(array $rule, $string): bool
+	public function validatePassword(array $rule, string $string): bool
 	{
 		if(strlen($string) < $rule['min_length'])
 		{
-			$this->isValid = false;
 			$this->errors[$rule['fieldName']] = 'Hasło wymaga przynamniej 5 znaków';
 			return false;
 		}
@@ -40,11 +36,10 @@ class Validator
 		return true;
 	}
 	
-	public function validateEmail(array $rule,$string): bool
+	public function validateEmail(array $rule, string $string): bool
 	{
 		if(filter_var($string, FILTER_VALIDATE_EMAIL) === false && $rule['valid'] === true )
 		{
-			$this->isValid = false;
 			$this->errors[$rule['fieldName']] = 'Email ma nieprawidłowy format';
 			return false;
 		}
@@ -52,18 +47,16 @@ class Validator
 			return true;
 	}
 	
-	public function validateUsername(array $rule,$string): bool
+	public function validateUsername(array $rule, string $string): bool
 	{
 		if(strlen($string) < $rule['minLength'] || strlen($string) > $rule['maxLength'])
 		{
-			$this->isValid = false;
 			$this->errors[$rule['fieldName']] = 'Nazwa użytkownika powinna mieć od 4 do 8 znaków';
 			return false;
 		}
 		
 		if($rule['alphanumeric'] === true && !ctype_alnum($string))
 		{
-			$this->isValid = false;
 			$this->errors[$rule['fieldName']] = 'Nazwa użytkownika powinna zawierać znaki alfanumeryczne';
 			return false;
 		}
@@ -71,7 +64,7 @@ class Validator
 		return true;
 	}
 	
-	public function validateData(array $data)
+	public function validateData(array $data): bool
 	{
 		$rules = [
 			[

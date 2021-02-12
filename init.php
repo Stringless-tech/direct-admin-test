@@ -7,7 +7,7 @@ define('INSTALL_DIR', __DIR__);
 function my_autoloader($class) {
     include 'classes/' . $class . '.php';
 }
-spl_autoload_register('my_autoloader');
+spl_autoload_register(function($class){ include 'classes/' . $class . '.php'; });
 require 'lib.php';
 set_error_handler(function($errno,$errstr,$errfile,$errline,$errcontext){
         echo H('Error: ' .$errstr);
